@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Chopper.js Demo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <nav class="g-nav" id="gNav">
+    <ul>
+      <li>
+        <a href="#first">#first</a>
+      </li>
+      <li>
+        <a href="#second">#second</a>
+      </li>
+      <li>
+        <a href="#third">#third</a>
+      </li>
+      <li>
+        <a href="#fourth">#fourth</a>
+      </li>
+    </ul>
+  </nav>
+
+  <button id="stop">stop</button>
+
+  <script src="../dest/chopper.js"></script>
+  <script>
+    var chopper = new Chopper({
+      onInit: function() {
+        alert('Hash watching init !!');
+      },
+
+      onChange: function(hash) {
+        alert('Changed to ' + hash + ' !!');
+      }
+    });
+
+    chopper.start();
+
+
+
+    var addEvent = function(el, type, func) {
+      if (el.addEventListener) {
+        el.addEventListener(type, func, false);
+      } else if (el.attachEvent){
+        el.attachEvent('on' + type, func);
+      }
+    };
+
+    var stop = document.getElementById('stop');
+
+    addEvent(stop, 'click', function() {
+      chopper.stop();
+    });
+  </script>
+</body>
+</html>
