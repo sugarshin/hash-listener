@@ -1,5 +1,6 @@
 gulp = require 'gulp'
 plumber = require 'gulp-plumber'
+sourcemaps = require 'gulp-sourcemaps'
 coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 notify = require 'gulp-notify'
@@ -14,7 +15,9 @@ gulp.task 'coffee', ->
       errorHandler: notify.onError '<%= error.message %>'
     )
     .pipe coffeelint()
+    .pipe(sourcemaps.init())
     .pipe coffee()
+    .pipe(sourcemaps.write())
     .pipe gulp.dest('dest/')
 
 gulp.task 'serve', ->

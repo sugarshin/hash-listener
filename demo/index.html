@@ -24,23 +24,17 @@
     </ul>
   </nav>
 
-  <button id="stop">stop</button>
+  <button id="off">off</button>
 
   <script src="../dest/chopper.js"></script>
   <script>
-    var chopper = new Chopper({
-      onInit: function() {
-        alert('Hash watching init !!');
-      },
 
-      onChange: function(hash) {
-        alert('Changed to ' + hash + ' !!');
-      }
+    chopper.changed(function(hash, newURL, oldURL) {
+      var txt = 'hash >> ' + hash + '\n' +
+                'newURL >> ' + newURL + '\n' +
+                'oldURL >> ' + oldURL;
+      alert(txt);
     });
-
-    chopper.start();
-
-
 
     var addEvent = function(el, type, func) {
       if (el.addEventListener) {
@@ -50,10 +44,10 @@
       }
     };
 
-    var stop = document.getElementById('stop');
+    var off = document.getElementById('off');
 
-    addEvent(stop, 'click', function() {
-      chopper.stop();
+    addEvent(off, 'click', function() {
+      chopper.off();
     });
   </script>
 </body>

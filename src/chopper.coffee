@@ -1,6 +1,6 @@
 ###!
 Chopper.js
-Hash change event polyfill
+Hashchange event polyfill
 License MIT
 ###
 class Chopper
@@ -25,10 +25,30 @@ class Chopper
   # Helper -----------------------------
 
 
+  # hashchange polyfill 
+  newURL = null
+  oldURL = null
 
+  _timer = null
+  _hash = null
+
+
+
+  _init = ->
+    _hash = location.hash
+    oldURL = location.href
+
+    if _isFunc @options.onInit
+      @options.onInit()
+
+    return
+
+
+
+  # Default options
   defaults =
-    onInit: null
-    onChange: null
+    onInit: ->
+    onChange: ->
     interval: 100
 
 
@@ -36,39 +56,38 @@ class Chopper
   constructor: (options) ->
     @options = _extend {}, defaults, options
 
-    @_init()
+    _init.call @
 
-  timer: null
-  hash: null
 
-  _init: () ->
-    @hash = location.hash
-    if _isFunc @options.onInit
-      @options.onInit()
-    return
 
-  start: (hash) ->
-    h = if hash then hash else location.hash
 
-    if @hash isnt h and _isFunc @options.onChange
-      @options.onChange h
+  changed: (callback) ->
+    h = location.hash
 
-    @hash = h
+    if _hash isnt h and _isFunc callback
+      newURL = location.href
+      callback h, newURL, oldURL
+
+    _hash = h
+    oldURL = location.href
 
     _this = @
-    @timer = setTimeout(->
-      _this.start()
+    _timer = setTimeout(->
+      _this.changed callback
       return
     , @options.interval)
     @
 
-  stop: (hash) ->
-    clearTimeout @timer
+  off: (hash) ->
+    clearTimeout _timer
 
-    if hash?
-      @hash = hash
+    if hash? then _hash = hash
     @
 
 # class Chopper ------------------------
 
-window.Chopper = window.Chopper or Chopper
+window.chopper = window.chopper or new Chopper()
+
+
+
+

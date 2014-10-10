@@ -12,20 +12,36 @@ IE7+ and other minor browser
 ## Usage
 
 ```js
-var chopper = new Chopper({
-  onInit: function() {},
-
-  onChange: function(hash) {},
-
-  interval: 100
-});
-
-chopper.start();
+chopper.changed(function(hash, newURL, oldURL) {});
 ```
+
+Dispatched hashchange event has the following fields polyfill
+
+* `newURL`
+
+New URL to which the window is navigating
+
+* `oldURL`
+
+Previous URL from which the window was navigated
+
+## api
+
+### `.changed(callback)`
+
+Hash watch start
+
+### `.off( [hash] )`
+
+Hash watch stop
 
 ## Contributing
 
-Using gulp
+This library was developed with following things
+
+[gulp](http://gulpjs.com/)
+
+[CoffeeScript](http://coffeescript.org/)
 
 ```shell
 npm i
