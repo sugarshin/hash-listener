@@ -12,10 +12,12 @@ IE7+ and other minor browser
 ## Usage
 
 ```js
-chopper.changed(function(hash, newURL, oldURL) {});
+var chopper = new Chopper();
+
+chopper.on(function(hash, newURL, oldURL) {});
 ```
 
-Dispatched hashchange event has the following fields polyfill
+**Dispatched hashchange event has the following fields polyfill**
 
 * `newURL`
 
@@ -25,15 +27,27 @@ New URL to which the window is navigating
 
 Previous URL from which the window was navigated
 
+**Set when create an instance**
+
+```js
+var chopper = new Chopper({
+  onInit: function() {},
+  onChange: function(hash, newURL, oldURL) {},
+  interval: 100
+});
+
+chopper.on();
+```
+
 ## api
 
-### `.changed(callback)`
+### `.on( [callback] )`
 
-Hash watch start
+Add event listener
 
-### `.off( [hash] )`
+### `.off( [callback] [, hash] )`
 
-Hash watch stop
+Remove event listener
 
 ## Contributing
 

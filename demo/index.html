@@ -24,17 +24,24 @@
     </ul>
   </nav>
 
+  <button id="on">on</button>
   <button id="off">off</button>
 
   <script src="../dest/chopper.js"></script>
   <script>
-
-    chopper.changed(function(hash, newURL, oldURL) {
-      var txt = 'hash >> ' + hash + '\n' +
-                'newURL >> ' + newURL + '\n' +
-                'oldURL >> ' + oldURL;
-      alert(txt);
+    var chopper = new Chopper({
+      onInit: function() {
+        alert('Chopper initialized !!');
+      },
+      onChange: function(hash, newURL, oldURL) {
+        var txt = 'hash >> ' + hash + '\n' +
+                  'newURL >> ' + newURL + '\n' +
+                  'oldURL >> ' + oldURL;
+        alert(txt);
+      }
     });
+
+    chopper.on();
 
     var addEvent = function(el, type, func) {
       if (el.addEventListener) {
@@ -44,7 +51,18 @@
       }
     };
 
+    var on = document.getElementById('on');
     var off = document.getElementById('off');
+
+    addEvent(on, 'click', function() {
+      chopper.on(function(hash, newURL, oldURL) {
+        var txt = 'Once again !!' + '\n' +
+                  'hash >> ' + hash + '\n' +
+                  'newURL >> ' + newURL + '\n' +
+                  'oldURL >> ' + oldURL;
+        alert(txt);
+      });
+    });
 
     addEvent(off, 'click', function() {
       chopper.off();

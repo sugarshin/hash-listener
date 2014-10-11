@@ -3,7 +3,7 @@ Chopper.js
 Hashchange event polyfill
 License MIT
 ###
-class Chopper
+class window.Chopper
 
   # Helper -----------------------------
 
@@ -60,34 +60,29 @@ class Chopper
 
 
 
-
-  changed: (callback) ->
+  on: (callback) ->
     h = location.hash
 
-    if _hash isnt h and _isFunc callback
+    cb = if callback? then callback else @options.onChange
+
+    if _hash isnt h and _isFunc cb
       newURL = location.href
-      callback h, newURL, oldURL
+      cb h, newURL, oldURL
 
     _hash = h
     oldURL = location.href
 
     _this = @
     _timer = setTimeout(->
-      _this.changed callback
+      _this.on cb
       return
     , @options.interval)
-    @
+    return @
 
-  off: (hash) ->
+  off: (callback, hash) ->
     clearTimeout _timer
+    if callback? and _isFunc callback
+      callback()
 
     if hash? then _hash = hash
-    @
-
-# class Chopper ------------------------
-
-window.chopper = window.chopper or new Chopper()
-
-
-
-
+    return @
