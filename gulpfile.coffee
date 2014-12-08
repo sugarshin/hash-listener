@@ -1,35 +1,44 @@
 gulp = require 'gulp'
 plumber = require 'gulp-plumber'
-sourcemaps = require 'gulp-sourcemaps'
 coffee = require 'gulp-coffee'
 coffeelint = require 'gulp-coffeelint'
 notify = require 'gulp-notify'
+header = require 'gulp-header'
 uglify = require 'gulp-uglify'
 rename = require 'gulp-rename'
 bump = require 'gulp-bump'
 browserSync = require 'browser-sync'
+pkg = require './package.json'
+
+banner = """
+/*!
+ * @license #{pkg.name} v#{pkg.version}
+ * (c) #{new Date().getFullYear()} #{pkg.author} #{pkg.homepage}
+ * License: #{pkg.license}
+ */
+
+"""
+
+fileName = 'chopper'
 
 gulp.task 'coffee', ->
-  gulp.src 'src/chopper.coffee'
-    .pipe plumber(
+  gulp.src "src/#{fileName}.coffee"
+    .pipe plumber
       errorHandler: notify.onError '<%= error.message %>'
-    )
+
     .pipe coffeelint()
-    .pipe(sourcemaps.init())
     .pipe coffee()
-    .pipe(sourcemaps.write())
+    .pipe header(banner)
     .pipe gulp.dest('dest/')
 
 gulp.task 'serve', ->
-  browserSync(
+  browserSync
     server:
       baseDir: './'
       index: 'demo/index.html'
-  )
 
 gulp.task 'default', ['serve'], ->
-  gulp.watch ['src/chopper.coffee'], ['coffee', browserSync.reload]
-  return
+  gulp.watch ["src/#{fileName}.coffee"], ['coffee', browserSync.reload]
 
 gulp.task 'major', ->
   gulp.src './*.json'
@@ -37,7 +46,6 @@ gulp.task 'major', ->
       type: 'major'
     )
     .pipe gulp.dest('./')
-  return
 
 gulp.task 'minor', ->
   gulp.src './*.json'
@@ -45,7 +53,6 @@ gulp.task 'minor', ->
       type: 'minor'
     )
     .pipe gulp.dest('./')
-  return
 
 gulp.task 'patch', ->
   gulp.src './*.json'
@@ -53,17 +60,11 @@ gulp.task 'patch', ->
       type: 'patch'
     )
     .pipe gulp.dest('./')
-  return
 
-gulp.task 'build', ->
-  gulp.src 'src/chopper.coffee'
-    .pipe coffeelint()
-    .pipe coffee()
-    .pipe uglify(
+gulp.task 'build', ['coffee'], ->
+  gulp.src "dest/#{fileName}.js"
+    .pipe uglify
       preserveComments: 'some'
-    )
-    .pipe rename(
+    .pipe rename
       extname: '.min.js'
-    )
     .pipe gulp.dest('dest/')
-  return

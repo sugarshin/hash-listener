@@ -6,7 +6,7 @@ IE7+ and other minor browser
 
 ## Demo
 
-[https://tsumikiinc.github.io/chopper.js/demo/](https://tsumikiinc.github.io/chopper.js/demo/)
+[https://sugarshin.github.io/chopper.js/demo/](https://sugarshin.github.io/chopper.js/demo/)
 
 
 ## Usage
@@ -64,7 +64,5 @@ npm i
 ## License
 
 MIT
-
-© Tsumiki inc.
 
 © sugarshin
