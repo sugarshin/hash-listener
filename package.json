@@ -1,23 +1,26 @@
 {
-  "name": "Chopper.js",
-  "version": "1.3.0",
-  "description": "Hashchange event Polyfill",
-  "homepage": "https://github.com/sugarshin",
-  "repository": "git@github.com:sugarshin/chopper.js.git",
+  "name": "hash-listener",
+  "version": "2.0.0",
+  "description": "HashListener",
+  "repository": "git@github.com:sugarshin/hash-listener.git",
+  "main": "./hash-listener.js",
+  "scripts": {
+    "start": "node ./node_modules/.bin/coffee -cbw hash-listener.coffee",
+    "pretest": "node ./node_modules/.bin/browserify -t coffeeify test/test.coffee -o test/test.js",
+    "test": "node ./node_modules/.bin/phantomjs ./node_modules/mocha-phantomjs/lib/mocha-phantomjs.coffee test/index.html"
+  },
+  "engines": {
+    "node": "0.10.x"
+  },
   "author": "sugarshin",
   "license": "MIT",
   "devDependencies": {
-    "browser-sync": "^1.7.2",
-    "coffee-script": "^1.8.0",
-    "gulp": "^3.8.10",
-    "gulp-bump": "^0.1.11",
-    "gulp-coffee": "^2.2.0",
-    "gulp-coffeelint": "^0.4.0",
-    "gulp-header": "^1.2.2",
-    "gulp-notify": "^2.0.1",
-    "gulp-plumber": "^0.6.6",
-    "gulp-rename": "^1.2.0",
-    "gulp-sourcemaps": "^1.2.2",
-    "gulp-uglify": "^1.0.2"
+    "browserify": "^8.1.3",
+    "coffee-script": "^1.9.0",
+    "coffeeify": "^1.0.0",
+    "mocha": "^2.1.0",
+    "mocha-phantomjs": "^3.5.3",
+    "phantomjs": "^1.9.15",
+    "power-assert": "^0.10.2"
   }
 }

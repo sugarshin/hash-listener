@@ -1,68 +1,67 @@
-# Chopper.js
+# hash-listener
 
-Hashchange event Polyfill
+HashListener
 
-IE7+ and other minor browser
+[![Build Status](https://travis-ci.org/sugarshin/hash-listener.svg?branch=master)](https://travis-ci.org/sugarshin/hash-listener) [![GitHub version](https://badge.fury.io/gh/sugarshin%2Fhash-listener.svg)](http://badge.fury.io/gh/sugarshin%2Fhash-listener) [![License](http://img.shields.io/:license-mit-blue.svg)](http://sugarshin.mit-license.org/)
 
-## Demo
-
-[https://sugarshin.github.io/chopper.js/demo/](https://sugarshin.github.io/chopper.js/demo/)
-
-
-## Usage
-
-```js
-var chopper = new Chopper();
-
-chopper.on(function(hash, newURL, oldURL) {});
+```shell
+npm i sugarshin/hash-listener
 ```
 
-**Dispatched hashchange event has the following fields polyfill**
+## usage
 
-* `newURL`
+```coffeescript
+HashListener = require 'hash-listener'
 
-New URL to which the window is navigating
+hl = new HashListener
+hl.start (hash, newURL, oldURL) ->
+```
 
-* `oldURL`
+or
 
-Previous URL from which the window was navigated
+```html
+<script src="hash-listener.js"></script>
+<script>
+  var hl = new HashListener;
+  hl.start(function(hash, newURL, oldURL) {});
+</script>
+```
 
 **Set when create an instance**
 
-```js
-var chopper = new Chopper({
-  onInit: function() {},
-  onChange: function(hash, newURL, oldURL) {},
+```coffeescript
+hl = new HashListener
+  onInit: (hash) ->
+  onChange: (hash, newURL, oldURL) ->
   interval: 100
-});
 
-chopper.on();
+hl.start()
 ```
 
 ## api
 
-### `.on( [callback] )`
+### `.start( [callback] )`
 
 Add event listener
 
-### `.off( [callback] [, hash] )`
+### `.stop( [callback] [, hash] )`
 
 Remove event listener
 
 ## Contributing
 
-This library was developed with following things
+[CoffeeScript](//coffeescript.org/)
 
-[gulp](http://gulpjs.com/)
+[mocha-phantomjs](//github.com/metaskills/mocha-phantomjs)
 
-[CoffeeScript](http://coffeescript.org/)
+[power-assert](//github.com/twada/power-assert)
 
 ```shell
-npm i
+npm test
 ```
 
 ## License
 
-MIT
+[MIT](http://sugarshin.mit-license.org/)
 
 © sugarshin
