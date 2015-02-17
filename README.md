@@ -1,8 +1,8 @@
 # hash-listener
 
-HashListener
-
 [![Build Status](https://travis-ci.org/sugarshin/hash-listener.svg?branch=master)](https://travis-ci.org/sugarshin/hash-listener) [![GitHub version](https://badge.fury.io/gh/sugarshin%2Fhash-listener.svg)](http://badge.fury.io/gh/sugarshin%2Fhash-listener) [![License](http://img.shields.io/:license-mit-blue.svg)](http://sugarshin.mit-license.org/)
+
+HashListener
 
 ```shell
 npm i sugarshin/hash-listener
