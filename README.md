@@ -6,7 +6,7 @@ HashListener
 
 substitutes for [hashchange event](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onhashchange)
 
-```shell
+```
 npm i hash-listener
 ```
 
@@ -54,7 +54,7 @@ Stop listening
 
 **Incomplete** **WIP**
 
-```shell
+```
 npm test
 ```
 
