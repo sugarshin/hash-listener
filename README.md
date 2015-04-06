@@ -4,8 +4,10 @@
 
 HashListener
 
+substitutes for [hashchange event](https://developer.mozilla.org/en-US/docs/Web/API/WindowEventHandlers/onhashchange)
+
 ```shell
-npm i sugarshin/hash-listener
+npm i hash-listener
 ```
 
 ## usage
@@ -20,14 +22,14 @@ hl.start (hash, newURL, oldURL) ->
 or
 
 ```html
-<script src="hash-listener.js"></script>
+<script src="build/hash-listener.js"></script>
 <script>
   var hl = new HashListener;
   hl.start(function(hash, newURL, oldURL) {});
 </script>
 ```
 
-**Set when create an instance**
+### set when create an instance
 
 ```coffeescript
 hl = new HashListener
@@ -42,25 +44,21 @@ hl.start()
 
 ### `.start( [callback] )`
 
-Add event listener
+Start listening
 
 ### `.stop( [callback] [, hash] )`
 
-Remove event listener
+Stop listening
 
-## Contributing
+## contributing
 
-[CoffeeScript](//coffeescript.org/)
-
-[mocha-phantomjs](//github.com/metaskills/mocha-phantomjs)
-
-[power-assert](//github.com/twada/power-assert)
+**Incomplete** **WIP**
 
 ```shell
 npm test
 ```
 
-## License
+## license
 
 [MIT](http://sugarshin.mit-license.org/)
 
